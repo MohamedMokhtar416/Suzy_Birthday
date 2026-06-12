@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كل سنة وانتِ طيبة يا سوزى</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #261a2b;
+    --bg-vignette: #1a1020;
+    --cream: #f7ecd9;
+    --rose: #d98a9c;
+    --gold: #e8b96a;
+    --candle-glow: #ffb35c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at center, var(--bg-deep) 0%, var(--bg-vignette) 75%);
+    font-family: 'Cormorant Garamond', serif;
+    overflow: hidden;
+    position: relative;
+    color: var(--cream);
+  }
+
+  .stars { position: absolute; inset: 0; pointer-events: none; }
+  .star {
+    position: absolute; width: 3px; height: 3px;
+    background: var(--gold); border-radius: 50%; opacity: 0.5;
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.6); }
+  }
+
+  .stage {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 40px 24px;
+    max-width: 90vw;
+  }
+
+  .candle-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 28px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .candle {
+    width: 22px;
+    height: 70px;
+    background: linear-gradient(180deg, var(--rose) 0%, #b8607a 100%);
+    border-radius: 6px 6px 3px 3px;
+    position: relative;
+    box-shadow: inset -4px 0 8px rgba(0,0,0,0.25);
+  }
+
+  .candle::before, .candle::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 5px;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+  .candle::before { top: 18px; }
+  .candle::after { top: 40px; }
+
+  .wick {
+    position: absolute;
+    top: -10px; left: 50%;
+    transform: translateX(-50%);
+    width: 3px; height: 10px;
+    background: #4a3a2a; border-radius: 2px;
+  }
+
+  .flame {
+    position: absolute;
+    top: -36px; left: 50%;
+    transform: translateX(-50%);
+    width: 18px; height: 30px;
+    background: radial-gradient(ellipse at 50% 70%, #fff7d6 0%, var(--candle-glow) 45%, #ff7a3c 80%, transparent 100%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    transform-origin: bottom center;
+    animation: flicker 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px var(--candle-glow));
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  @keyframes flicker {
+    0%, 100% { transform: translateX(-50%) rotate(-3deg) scaleY(1); }
+    50% { transform: translateX(-50%) rotate(3deg) scaleY(1.08); }
+  }
+
+  .flame.out { opacity: 0; transform: translateX(-50%) scaleY(0.2); }
+
+  .smoke {
+    position: absolute;
+    top: -40px; left: 50%;
+    transform: translateX(-50%);
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: rgba(230, 230, 230, 0.4);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .smoke.active { animation: smoke-rise 1.6s ease-out forwards; }
+  @keyframes smoke-rise {
+    0% { opacity: 0.5; transform: translate(-50%, 0) scale(1); }
+    100% { opacity: 0; transform: translate(-80%, -60px) scale(4); }
+  }
+
+  .hint {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    color: var(--rose);
+    opacity: 0.7;
+    margin-top: 6px;
+    text-transform: uppercase;
+    transition: opacity 0.6s ease;
+  }
+  .hint.hidden { opacity: 0; }
+
+  .message {
+    font-family: 'Amiri', serif;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 7vw, 4.6rem);
+    line-height: 1.5;
+    background: linear-gradient(90deg, var(--gold), var(--cream) 50%, var(--rose));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 6s linear infinite;
+    text-shadow: 0 2px 24px rgba(232, 185, 106, 0.15);
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .name { color: var(--rose); }
+
+  .subline {
+    margin-top: 22px;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    opacity: 0.85;
+  }
+
+  .sound-toggle {
+    position: fixed;
+    bottom: 24px;
+    inset-inline-end: 24px;
+    background: rgba(247, 236, 217, 0.08);
+    border: 1px solid rgba(232, 185, 106, 0.35);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    padding: 10px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: background 0.25s ease, border-color 0.25s ease;
+    z-index: 20;
+  }
+  .sound-toggle:hover, .sound-toggle:focus-visible {
+    background: rgba(232, 185, 106, 0.18);
+    border-color: var(--gold);
+  }
+  .sound-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  .confetti {
+    position: absolute;
+    top: -20px;
+    width: 8px; height: 14px;
+    opacity: 0;
+    border-radius: 2px;
+  }
+  .confetti.fall { animation: confetti-fall linear forwards; }
+  @keyframes confetti-fall {
+    0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+    100% { opacity: 0.9; transform: translateY(110vh) rotate(540deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flame, .star, .message { animation: none; }
+  }
+
+  @media (max-width: 480px) {
+    .candle { height: 56px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="stars" id="stars"></div>
+
+  <div class="stage">
+    <div class="candle-wrap" id="candleWrap" role="button" tabindex="0" aria-label="انفخي الشمعة لتشغيل الأغنية">
+      <div class="candle">
+        <div class="wick"></div>
+        <div class="flame" id="flame"></div>
+        <div class="smoke" id="smoke"></div>
+      </div>
+    </div>
+    <div class="hint" id="hint">انقري على الشمعة</div>
+
+    <div class="message">كل سنة وانتِ طيبة يا<br><span class="name">سوزى</span> 🎂</div>
+    <div class="subline">عيد ميلاد سعيد</div>
+  </div>
+
+  <button class="sound-toggle" id="soundToggle" aria-label="تشغيل أو إيقاف الموسيقى">🔈 تشغيل الموسيقى</button>
+
+  <script>
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 50; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.animationDelay = (Math.random() * 4) + 's';
+      starsContainer.appendChild(s);
+    }
+
+    let audioCtx;
+    let isPlaying = false;
+
+    const notes = {
+      C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23,
+      G4: 392.00, A4: 440.00, B4: 493.88, C5: 523.25
+    };
+
+    const melody = [
+      ['C4', 0.3], ['C4', 0.2], ['D4', 0.5], ['C4', 0.5], ['F4', 0.5], ['E4', 1.0],
+      ['C4', 0.3], ['C4', 0.2], ['D4', 0.5], ['C4', 0.5], ['G4', 0.5], ['F4', 1.0],
+      ['C4', 0.3], ['C4', 0.2], ['C5', 0.5], ['A4', 0.5], ['F4', 0.5], ['E4', 0.5], ['D4', 1.0],
+      ['B4', 0.3], ['B4', 0.2], ['A4', 0.5], ['F4', 0.5], ['G4', 0.5], ['F4', 1.0]
+    ];
+
+    function playNote(freq, duration, startTime) {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+
+      gain.gain.setValueAtTime(0, startTime);
+      gain.gain.linearRampToValueAtTime(0.18, startTime + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(startTime);
+      osc.stop(startTime + duration + 0.05);
+    }
+
+    function playMelody() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      let t = audioCtx.currentTime + 0.1;
+      let totalDur = 0;
+      melody.forEach(([note, dur]) => {
+        playNote(notes[note], dur * 0.9, t);
+        t += dur;
+        totalDur += dur;
+      });
+
+      isPlaying = true;
+      soundToggle.textContent = '🔊 تُعزف الآن...';
+      setTimeout(() => {
+        isPlaying = false;
+        soundToggle.textContent = '🔈 تشغيل الموسيقى';
+      }, (totalDur + 0.2) * 1000);
+    }
+
+    const soundToggle = document.getElementById('soundToggle');
+    soundToggle.addEventListener('click', () => {
+      if (!isPlaying) playMelody();
+    });
+
+    const candleWrap = document.getElementById('candleWrap');
+    const flame = document.getElementById('flame');
+    const smoke = document.getElementById('smoke');
+    const hint = document.getElementById('hint');
+    let blownOut = false;
+
+    function blowOutCandle() {
+      if (blownOut) return;
+      blownOut = true;
+      flame.classList.add('out');
+      smoke.classList.add('active');
+      hint.classList.add('hidden');
+      launchConfetti();
+      if (!isPlaying) playMelody();
+
+      setTimeout(() => {
+        flame.classList.remove('out');
+        smoke.classList.remove('active');
+        hint.classList.remove('hidden');
+        blownOut = false;
+      }, 6000);
+    }
+
+    candleWrap.addEventListener('click', blowOutCandle);
+    candleWrap.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        blowOutCandle();
+      }
+    });
+
+    const confettiColors = ['#e8b96a', '#d98a9c', '#f7ecd9', '#c97b8f', '#f0c987'];
+
+    function launchConfetti() {
+      for (let i = 0; i < 40; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+        piece.style.animationDuration = (2.5 + Math.random() * 2) + 's';
+        document.body.appendChild(piece);
+        requestAnimationFrame(() => piece.classList.add('fall'));
+        setTimeout(() => piece.remove(), 5000);
+      }
+    }
+  </script>
+</body>
+</html>
